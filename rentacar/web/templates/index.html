@@ -15,9 +15,11 @@
 </head>
 <body>
     <!-- Botón flotante de WhatsApp -->
-    <a href="https://wa.me/qr/OJLOLYEG3LVIN1" class="whatsapp-float" target="_blank">
+    {% if whatsapp_link %}
+    <a href="{{ whatsapp_link.link }}" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
+    {% endif %}
 
     <!-- Barra de Navegación -->
     <nav class="navbar navbar-expand-lg fixed-top">

@@ -30,3 +30,13 @@ class Contacto(models.Model):
 
     def __str__(self):
         return "Información de Contacto"
+
+class WhatsAppLink(models.Model):
+    link = models.URLField(max_length=200, help_text="Enlace de WhatsApp completo (incluyendo https://)")
+
+    def __str__(self):
+        return "Enlace de WhatsApp"
+
+    class Meta:
+        verbose_name = "Enlace de WhatsApp"
+        verbose_name_plural = "Enlace de WhatsApp"
