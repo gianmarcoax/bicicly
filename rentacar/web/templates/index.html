@@ -8,6 +8,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Fuente Poppins de Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Styles.css -->
     <link href="../static/web/css/styles.css" rel="stylesheet">
     <style>
         
@@ -46,10 +49,10 @@
             <div class="carousel-item {% if forloop.first %}active{% endif %}" style="background-image: url('{{ imagen.imagen.url }}');">
                 <div class="carousel-caption d-flex flex-column justify-content-center align-items-center">
                     {% if imagen.titulo %}
-                        <h1 class="display-4">{{ imagen.titulo }}</h1>
+                        <h1 class="display-4 animate-slide-up">{{ imagen.titulo }}</h1>
                     {% endif %}
                     {% if imagen.descripcion %}
-                        <p class="lead">{{ imagen.descripcion }}</p>
+                        <p class="lead animate-slide-up" style="animation-delay: 0.3s">{{ imagen.descripcion }}</p>
                     {% endif %}
                 </div>
             </div>
@@ -63,25 +66,26 @@
         </button>
     </div>
     
-    <!-- Sección Nosotros -->
-    <section id="nosotros">
-        <div class="container">
-            <h2 class="text-center mb-5">Nosotros</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <p>{% autoescape off %}{{ nosotros.descripcion|linebreaks }}{% endautoescape %}</p>
-                </div>
-                <div class="col-md-6">
-                    <img src="../../media/nosotros/about.jpg" alt="Nosotros" class="img-fluid rounded">
-                </div>
+<!-- Sección Nosotros -->
+<section id="nosotros" class="bg-gray-light">
+    <div class="container">
+        <h1 class="text-center mb-5 reveal">Nosotros</h1>
+        <div class="row">
+            <div class="col-md-6 reveal">
+                <p>{% autoescape off %}{{ nosotros.descripcion|linebreaks }}{% endautoescape %}</p>
+            </div>
+            <div class="col-md-6 reveal" style="animation-delay: 0.3s">
+                <img src="{{ nosotros.imagen.url }}" alt="Nosotros" class="img-fluid rounded">
             </div>
         </div>
-    </section>
+    </div>
+</section>
+<div class="divider"></div>
 
     <!-- Sección Flota -->
-    <section id="flota" class="bg-light">
+    <section id="flota" class="bg-gray-dark">
         <div class="container">
-            <h2 class="text-center mb-5">Nuestra Flota</h2>
+            <h1 class="text-center mb-5">Nuestra Flota</h1>
             <div class="row">
                 {% for vehiculo in vehiculos %}
                 <div class="col-md-4 mb-4">
@@ -99,20 +103,20 @@
     </section>
 
  <!-- Sección Contacto -->
- <section id="contacto">
+ <section id="contacto" class="bg-gray-light">
     <div class="container">
-        <h2 class="text-center mb-5">Contacto</h2>
+        <h1 class="text-center mb-5 reveal">Contacto</h1>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 reveal-left " >
                 <div class="contact-info">
                     <h3 class="text-white">Información de Contacto</h3>
                     <p>Para más información, contáctanos:</p>
-                    <p>Teléfono: {{ contacto.telefono }}</p>
-                    <p>Email: {{ contacto.email }}</p>
-                    <p>Dirección: {{ contacto.direccion }}</p>
+                    <p><i class="fas fa-phone-alt"></i> Teléfono: {{ contacto.telefono }}</p>
+                    <p><i class="fas fa-envelope"></i> Email: {{ contacto.email }}</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Dirección: {{ contacto.direccion }}</p>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 reveal-right">
                 <form>
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
@@ -134,5 +138,60 @@
 </section>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Animaciones al hacer scroll
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        
+        // Reiniciar animaciones al cambiar slide del carrusel
+        document.getElementById('carouselExample').addEventListener('slide.bs.carousel', function () {
+            const captions = this.querySelectorAll('.animate-slide-up');
+            captions.forEach(caption => {
+                caption.style.animation = 'none';
+                void caption.offsetWidth; // Trigger reflow
+                caption.style.animation = 'slideUp 0.8s ease-out';
+            });
+        }   );
+
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+
+        // Reiniciar animaciones al cambiar slide del carrusel
+        document.getElementById('carouselExample')?.addEventListener('slide.bs.carousel', function () {
+            const captions = this.querySelectorAll('.animate-slide-up');
+            captions.forEach(caption => {
+                caption.style.animation = 'none';
+                void caption.offsetWidth; // Trigger reflow
+                caption.style.animation = 'slideUp 0.8s ease-out';
+            });
+        });
+
+        </script>
 </body>
 </html>

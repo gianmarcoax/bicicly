@@ -24,6 +24,8 @@ MEDIA_URL = '/media/'  # Ruta para servir archivos multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Ruta para guardar archivos subidos
 
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
