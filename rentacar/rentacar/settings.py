@@ -23,7 +23,15 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Ruta para recopilar archi
 MEDIA_URL = '/media/'  # Ruta para servir archivos multimedia
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Ruta para guardar archivos subidos
 
+# settings.py
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Servidor SMTP de Gmail
+EMAIL_PORT = 587  # Puerto para TLS
+EMAIL_USE_TLS = True  # Usar TLS para seguridad
+EMAIL_HOST_USER = 'flamedancert@gmail.com'  # Tu correo de Gmail
+EMAIL_HOST_PASSWORD = 'nhbq wdzy eurj ttzr'  # Tu contraseña de Gmail o una contraseña de aplicación
+#DEFAULT_FROM_EMAIL = 'tuemail@gmail.com'  # Correo remitente
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
